@@ -93,14 +93,13 @@ class PersonnagesManager
       $perso->setStrength($perso->level());
     }
 
-    $q = $this->db->prepare('UPDATE personnages SET xp = :xp, level = :level, strength = :strength, degats = :degats, classe = :classe WHERE id = :id');
+    $q = $this->db->prepare('UPDATE personnages SET xp = :xp, level = :level, strength = :strength, degats = :degats WHERE id = :id');
 
     $q->bindValue(':xp', $perso->xp(), PDO::PARAM_INT);
     $q->bindValue(':degats', ($perso->degats() + $strength), PDO::PARAM_INT);
     $q->bindValue(':level', $perso->level(), PDO::PARAM_INT);
     $q->bindValue(':strength', $perso->strength(), PDO::PARAM_INT);
     $q->bindValue(':id', $perso->id(), PDO::PARAM_INT);
-    $q->bindValue(':classe', $perso->classe(), PDO::PARAM_INT);
 
     $q->execute();
   }
